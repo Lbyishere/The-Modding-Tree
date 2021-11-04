@@ -2,7 +2,7 @@ let modInfo = {
 	name: "The Universe Tree",
 	id: "mymod",
 	author: "nobody",
-	pointsName: "points",
+	pointsName: "atoms",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
