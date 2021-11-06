@@ -8,14 +8,14 @@ addLayer("p", {
     }},
     color: "#4BDC13",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "prestige points", // Name of prestige currency
+    resource: "Hydrogen", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(2)
-        if (hasUpgrade('p', 11)) gain = gain.times(2)
+        mult = new Decimal(1)
+        if (hasUpgrade('p', 11)) mult = mult.times(2)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -29,10 +29,23 @@ addLayer("p", {
     upgrades:{
         11:{
         title: "Atomic Gain",
-        description: "doubles atom gain",
+        description: "Doubles atom gain",
         cost: new Decimal(1)
-
-        
+        },
+        12:{
+        title: "More Hydrogen",
+        description: "Double Hydrogen gain",
+        cost: new Decimal(5)
+        },
+        13:{
+            title: "More Hydrogen",
+            description: "Double Hydrogen gain",
+            cost: new Decimal(5),
+            
+            effect() {
+                return player[this.layer].points.add(1).pow(0.5)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
 
     },
