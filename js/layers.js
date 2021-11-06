@@ -14,7 +14,8 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
+        if (hasUpgrade('p', 11)) gain = gain.times(2)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -24,5 +25,15 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades:{
+        11:{
+        title: "Atomic Gain",
+        description: "doubles atom gain",
+        cost: new Decimal(1)
+
+        
+        },
+
+    },
 })
